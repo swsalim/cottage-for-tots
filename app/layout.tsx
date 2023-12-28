@@ -1,6 +1,8 @@
 import { cn } from '@/lib/className';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
+import Image from 'next/image';
+import Script from 'next/script';
 import './globals.css';
 
 const seo = {
@@ -65,7 +67,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn(GeistSans.variable, 'antialiased')}>
-      <body className="flex h-screen flex-col bg-stone-50">{children}</body>
+      <head>
+        <Script
+          id="simple-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`,
+          }}
+        />
+      </head>
+      <body className="flex h-screen flex-col bg-stone-50">
+        {children}
+        <script
+          async
+          defer
+          src="https://stats.cottagefortots.com/latest.js"></script>
+        <noscript>
+          <Image
+            src="https://stats.cottagefortots.com/noscript.gif?collect-dnt=true"
+            alt=""
+            referrerPolicy="no-referrer-when-downgrade"
+            width="1"
+            height="1"
+          />
+        </noscript>
+      </body>
     </html>
   );
 }
