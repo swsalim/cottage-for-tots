@@ -1,3 +1,5 @@
+'use client';
+
 import { buttonVariants } from '@/components/Button';
 import Container from '@/components/Container';
 import { cn } from '@/lib/className';
@@ -5,7 +7,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="hero relative bg-zinc-50" data-testid="hero">
+    <div className="hero relative bg-inherit" data-testid="hero">
       <div className="hero-banner w-full-h-full absolute inset-0 -z-10"></div>
       <Container className="pb-12 pt-20 md:py-40">
         <div className="relative mx-auto mb-6 h-48 w-48 overflow-hidden rounded-full">
@@ -29,7 +31,7 @@ export default function Home() {
           <a
             href="https://shopee.sg/cottagefortots"
             className={cn(buttonVariants())}>
-            Visit our Store
+            Browse Products
           </a>
         </div>
       </Container>

@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'border border-solid border-transparent bg-blue-600 text-white hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:outline-none active:bg-blue-800',
+          'border border-solid border-transparent bg-[#184253] text-white hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:outline-none active:bg-blue-800',
         secondary:
           'border border-solid border-zinc-300 bg-white text-zinc-500 hover:border-zinc-700 hover:text-zinc-800 focus:border-zinc-700 active:border-zinc-700 active:bg-zinc-50 active:text-zinc-800',
         outline:

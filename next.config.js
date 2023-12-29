@@ -3,7 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['stats.cottagefortots.com.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'stats.cottagefortots.com', port: '' },
+    ],
   },
 };
 

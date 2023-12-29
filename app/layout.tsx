@@ -75,7 +75,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex h-screen flex-col bg-stone-50">
+      <body className="flex h-screen flex-col bg-[#f78e86] bg-opacity-10">
         {children}
         <script
           async
