@@ -1,26 +1,24 @@
-'use client';
+'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Popover } from '@headlessui/react'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-import { Popover } from '@headlessui/react';
-
-import { cn } from '@/lib/className';
-
-import Container from '@/components/Container';
-import Logo from '@/components/Logo';
+import { cn } from '@/lib/utils'
+import Container from '@/components/Container'
+import Logo from '@/components/Logo'
 
 function MobileNavLink({ children, ...props }) {
   return (
     <Popover.Button
       as={Link}
       className="block text-base leading-7 tracking-tight text-zinc-700"
-      {...props}>
+      {...props}
+    >
       {children}
     </Popover.Button>
-  );
+  )
 }
 
 function MobileSupportLink({ children, ...props }) {
@@ -29,31 +27,32 @@ function MobileSupportLink({ children, ...props }) {
       as={Link}
       className="block text-base leading-7 tracking-tight text-red-500 hover:text-red-700"
       target="_blank"
-      {...props}>
+      {...props}
+    >
       {children}
     </Popover.Button>
-  );
+  )
 }
 
 export default function Header() {
-  const isHomePage = usePathname() === '/';
-  const [isSticky, setIsSticky] = useState(false);
+  const isHomePage = usePathname() === '/'
+  const [isSticky, setIsSticky] = useState(false)
 
-  const headerRef = useRef();
+  const headerRef = useRef()
 
   useEffect(() => {
-    const header = headerRef.current;
+    const header = headerRef.current
     const observer = new IntersectionObserver(
       ([e]) => setIsSticky(e.intersectionRatio < 1),
       {
         threshold: [1],
-      },
-    );
+      }
+    )
 
-    if (header) observer.observe(header);
+    if (header) observer.observe(header)
 
-    return () => observer.unobserve(header);
-  }, [headerRef]);
+    return () => observer.unobserve(header)
+  }, [headerRef])
 
   return (
     <header
@@ -61,9 +60,10 @@ export default function Header() {
         'sticky inset-x-0 top-[-1px] z-50 bg-white duration-200 ease-in',
         {
           'shadow-lg': isSticky,
-        },
+        }
       )}
-      ref={headerRef}>
+      ref={headerRef}
+    >
       <Container className="flex items-center justify-between py-4">
         <div className="z-10 px-2 md:px-0">
           <Link href="/" passHref>
@@ -159,5 +159,5 @@ export default function Header() {
         </div> */}
       </Container>
     </header>
-  );
+  )
 }

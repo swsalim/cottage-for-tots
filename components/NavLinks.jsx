@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Popover } from '@headlessui/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronDownIcon } from 'lucide-react'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-import { Popover } from '@headlessui/react';
-import { AnimatePresence, motion } from 'framer-motion';
-
-import { navCategories, navSpecialities } from '@/config/routes';
-
-import { cn } from '@/lib/className';
-import { ChevronDownIcon } from 'lucide-react';
+import { navCategories, navSpecialities } from '@/config/routes'
+import { cn } from '@/lib/utils'
 
 function DropdownLink({ children, ...props }) {
   return (
     <Popover.Button
       as={Link}
       className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-zinc-800 transition duration-150 ease-in-out hover:bg-zinc-50"
-      {...props}>
+      {...props}
+    >
       {children}
     </Popover.Button>
-  );
+  )
 }
 
 export default function NavLinks() {
-  const pathname = usePathname();
-  let [hoveredIndex, setHoveredIndex] = useState(null);
+  const pathname = usePathname()
+  let [hoveredIndex, setHoveredIndex] = useState(null)
 
   return [
     [navSpecialities.title, '/physician', navSpecialities],
@@ -42,10 +40,11 @@ export default function NavLinks() {
                   open
                     ? 'text-blue-600 hover:text-blue-900'
                     : 'text-zinc-700 hover:text-zinc-800',
-                  'relative -mx-3 -my-2 rounded-lg text-base transition-colors delay-150 hover:delay-0 focus:outline-none',
+                  'relative -mx-3 -my-2 rounded-lg text-base transition-colors delay-150 hover:delay-0 focus:outline-none'
                 )}
                 onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}>
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
                 <AnimatePresence>
                   {hoveredIndex === index && (
                     <motion.span
@@ -65,7 +64,7 @@ export default function NavLinks() {
                   <ChevronDownIcon
                     className={cn(
                       open ? 'text-zinc-600' : 'text-zinc-400',
-                      'ml-1 h-6 w-6 group-hover:text-zinc-500',
+                      'ml-1 h-6 w-6 group-hover:text-zinc-500'
                     )}
                     aria-hidden="true"
                   />
@@ -93,12 +92,14 @@ export default function NavLinks() {
                         transition: { duration: 0.2 },
                       }}
                       // className="absolute inset-x-0 top-0 z-0 origin-top rounded-b-2xl bg-white px-6 pb-6 pt-20 shadow-2xl shadow-zinc-900/20">
-                      className="absolute z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-2 sm:px-0">
+                      className="absolute z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-2 sm:px-0"
+                    >
                       {/* <div className="relative mx-auto grid grid-cols-1 lg:grid-cols-2"> */}
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <nav
                           className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8"
-                          aria-label={dropdown.title}>
+                          aria-label={dropdown.title}
+                        >
                           <div>
                             {dropdown.href ? (
                               <Link href={dropdown.href}>
@@ -142,11 +143,12 @@ export default function NavLinks() {
             },
             {
               'text-blue-600 hover:text-blue-900': pathname === href,
-            },
+            }
           )}
           passHref
           onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}>
+          onMouseLeave={() => setHoveredIndex(null)}
+        >
           <AnimatePresence>
             {hoveredIndex === index && (
               <motion.span
@@ -165,5 +167,5 @@ export default function NavLinks() {
         </Link>
       )}
     </React.Fragment>
-  ));
+  ))
 }
