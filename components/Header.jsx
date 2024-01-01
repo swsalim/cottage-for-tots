@@ -1,26 +1,24 @@
-'use client';
+'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Popover } from '@headlessui/react'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-import { Popover } from '@headlessui/react';
-
-import { cn } from '@/lib/className';
-
-import Container from '@/components/Container';
-import Logo from '@/components/Logo';
+import { cn } from '@/lib/utils'
+import Container from '@/components/Container'
+import Logo from '@/components/Logo'
 
 function MobileNavLink({ children, ...props }) {
   return (
     <Popover.Button
       as={Link}
-      className="block text-base leading-7 tracking-tight text-zinc-700"
-      {...props}>
+      className="block text-base leading-7 tracking-tight text-slate-700"
+      {...props}
+    >
       {children}
     </Popover.Button>
-  );
+  )
 }
 
 function MobileSupportLink({ children, ...props }) {
@@ -29,31 +27,32 @@ function MobileSupportLink({ children, ...props }) {
       as={Link}
       className="block text-base leading-7 tracking-tight text-red-500 hover:text-red-700"
       target="_blank"
-      {...props}>
+      {...props}
+    >
       {children}
     </Popover.Button>
-  );
+  )
 }
 
 export default function Header() {
-  const isHomePage = usePathname() === '/';
-  const [isSticky, setIsSticky] = useState(false);
+  const isHomePage = usePathname() === '/'
+  const [isSticky, setIsSticky] = useState(false)
 
-  const headerRef = useRef();
+  const headerRef = useRef()
 
   useEffect(() => {
-    const header = headerRef.current;
+    const header = headerRef.current
     const observer = new IntersectionObserver(
       ([e]) => setIsSticky(e.intersectionRatio < 1),
       {
         threshold: [1],
-      },
-    );
+      }
+    )
 
-    if (header) observer.observe(header);
+    if (header) observer.observe(header)
 
-    return () => observer.unobserve(header);
-  }, [headerRef]);
+    return () => observer.unobserve(header)
+  }, [headerRef])
 
   return (
     <header
@@ -61,9 +60,10 @@ export default function Header() {
         'sticky inset-x-0 top-[-1px] z-50 bg-white duration-200 ease-in',
         {
           'shadow-lg': isSticky,
-        },
+        }
       )}
-      ref={headerRef}>
+      ref={headerRef}
+    >
       <Container className="flex items-center justify-between py-4">
         <div className="z-10 px-2 md:px-0">
           <Link href="/" passHref>
@@ -80,7 +80,7 @@ export default function Header() {
             {({ open }) => (
               <>
                 <Popover.Button
-                  className="relative z-10 -mx-2 inline-flex items-center rounded-lg stroke-zinc-900 p-2 hover:bg-zinc-200/50 hover:stroke-zinc-600 active:stroke-zinc-900 [&:not(:focus-visible)]:focus:outline-none"
+                  className="relative z-10 -mx-2 inline-flex items-center rounded-lg stroke-slate-900 p-2 hover:bg-slate-200/50 hover:stroke-slate-600 active:stroke-slate-900 [&:not(:focus-visible)]:focus:outline-none"
                   aria-label="Toggle site navigation">
                   {({ open }) =>
                     open ? (
@@ -99,7 +99,7 @@ export default function Header() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-0 bg-zinc-300/60 backdrop-blur"
+                        className="fixed inset-0 z-0 bg-slate-300/60 backdrop-blur"
                       />
                       <Popover.Panel
                         static
@@ -111,8 +111,8 @@ export default function Header() {
                           y: -32,
                           transition: { duration: 0.2 },
                         }}
-                        className="absolute inset-x-0 top-0 z-0 origin-top space-y-4 rounded-b-2xl bg-white px-6 pb-6 pt-20 shadow-2xl shadow-zinc-900/20">
-                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-zinc-500">
+                        className="absolute inset-x-0 top-0 z-0 origin-top space-y-4 rounded-b-2xl bg-white px-6 pb-6 pt-20 shadow-2xl shadow-slate-900/20">
+                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-500">
                           {navSpecialities.title}
                         </h3>
                         <div className="space-y-4">
@@ -127,7 +127,7 @@ export default function Header() {
                           })}
                         </div>
                         <hr />
-                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-zinc-500">
+                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-500">
                           {navCategories.title}
                         </h3>
                         <div className="space-y-4">
@@ -159,5 +159,5 @@ export default function Header() {
         </div> */}
       </Container>
     </header>
-  );
+  )
 }

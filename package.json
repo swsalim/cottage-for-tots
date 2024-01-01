@@ -3,26 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "concurrently \"contentlayer dev\" \"next dev\"",
+    "build": "contentlayer build && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "next build && next start",
+    "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-slot": "^1.0.2",
+    "@vercel/analytics": "^1.1.1",
+    "@vercel/og": "^0.6.1",
+    "@vercel/speed-insights": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "concurrently": "^8.2.2",
+    "contentlayer": "^0.3.4",
     "framer-motion": "^10.16.16",
     "geist": "^1.2.0",
     "lucide-react": "^0.303.0",
     "next": "14.0.4",
+    "next-contentlayer": "^0.3.4",
+    "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.2.0"
+    "sharp": "^0.33.1",
+    "shiki": "^0.14.7",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -30,11 +44,20 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "eslint-plugin-tailwindcss": "^3.13.1",
+    "mdast-util-toc": "^7.0.0",
     "postcss": "^8",
     "prettier": "^3.1.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.9",
+    "rehype": "^13.0.1",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.12.3",
+    "rehype-slug": "^6.0.0",
+    "remark": "^15.0.1",
+    "remark-gfm": "3.0.1",
+    "shikiji": "^0.9.15",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unist-util-visit": "^5.0.0"
   }
 }

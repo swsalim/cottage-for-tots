@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -9,9 +9,18 @@ const config = {
     './helpers/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
+        heading: ['var(--font-heading)', ...defaultTheme.fontFamily.sans],
       },
     },
     typography: (theme) => ({
@@ -92,7 +101,6 @@ const config = {
             marginTop: theme('spacing.7'),
             marginBottom: theme('spacing.7'),
           },
-
           // Headings
           'h2, h3': {
             color: 'var(--tw-prose-headings)',
@@ -317,8 +325,9 @@ const config = {
     }),
   },
   plugins: [
+    require('tailwindcss-animate'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
   ],
-};
-export default config;
+}
+export default config
