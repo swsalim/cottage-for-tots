@@ -1,43 +1,46 @@
-import { cn } from '@/lib/className';
-import { GeistSans } from 'geist/font/sans';
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Script from 'next/script';
-import './globals.css';
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import Image from 'next/image'
+import Script from 'next/script'
+import { GeistSans } from 'geist/font/sans'
 
-const seo = {
-  title: 'Nurturing Young Minds with Playful Learning',
-  description:
-    "Discover a world where education meets imagination. Our toys and books are specially curated to stimulate your child's development through every playful moment.",
-  openGraph: {
-    image: '/images/og-default.png',
-    imageAlt: 'Banner for cottagefortots.com',
-    width: '1200',
-    height: '630',
-  },
-  creator: '@swsalim',
-};
+import { cn } from '@/lib/utils'
+
+import '@/styles/globals.css'
+
+import { siteConfig } from '@/config/site'
+
+const fontHeading = localFont({
+  src: '../assets/fonts/CalSans-SemiBold.woff2',
+  variable: '--font-heading',
+})
 
 export const metadata: Metadata = {
   title: {
-    default: seo.title,
-    template: '%s · CottageForTots',
+    default: siteConfig.title,
+    template: `%s · ${siteConfig.siteName}`,
   },
-  description: seo.description,
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+  description: siteConfig.description,
+  metadataBase: siteConfig.url,
   alternates: {
     canonical: '/',
   },
+  authors: [
+    {
+      name: 'Yuyu',
+      url: 'https://www.yuurrific.com',
+    },
+  ],
   openGraph: {
-    title: seo.title,
-    description: seo.description,
-    url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
     images: [
       {
-        url: seo.openGraph.image,
-        width: seo.openGraph.width,
-        height: seo.openGraph.height,
-        alt: seo.openGraph.imageAlt,
+        url: siteConfig.openGraph.image,
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: siteConfig.openGraph.imageAlt,
       },
     ],
     locale: 'en_US',
@@ -50,23 +53,26 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: seo.title,
-    description: seo.description,
-    creator: seo.creator,
-    images: [seo.openGraph.image],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    creator: siteConfig.creator,
+    images: [siteConfig.openGraph.image],
   },
   robots: {
     index: true,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cn(GeistSans.variable, 'antialiased')}>
+    <html
+      lang="en"
+      className={cn('antialiased', GeistSans.variable, fontHeading.variable)}
+    >
       <head>
         <Script
           id="simple-analytics"
@@ -75,12 +81,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex h-screen flex-col bg-[#f78e86] bg-opacity-10">
+      <body className="flex min-h-screen flex-col bg-[#f78e86]/10 font-sans">
         {children}
         <script
           async
           defer
-          src="https://stats.cottagefortots.com/latest.js"></script>
+          src="https://stats.cottagefortots.com/latest.js"
+        ></script>
         <noscript>
           <Image
             src="https://stats.cottagefortots.com/noscript.gif?collect-dnt=true"
@@ -92,5 +99,5 @@ export default function RootLayout({
         </noscript>
       </body>
     </html>
-  );
+  )
 }
