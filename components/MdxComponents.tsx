@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react'
 import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
@@ -10,7 +11,7 @@ const components = {
   h1: ({ className, ...props }) => (
     <h1
       className={cn(
-        'mt-2 scroll-m-20 text-4xl font-bold tracking-tight',
+        'mt-2 scroll-m-20 text-4xl font-bold tracking-normal',
         className
       )}
       {...props}
@@ -19,7 +20,7 @@ const components = {
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
+        'font-heading mt-10 scroll-m-20 border-b pb-1 text-3xl tracking-wide first:mt-0',
         className
       )}
       {...props}
@@ -28,7 +29,7 @@ const components = {
   h3: ({ className, ...props }) => (
     <h3
       className={cn(
-        'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight',
+        'font-heading mt-8 scroll-m-20 text-2xl tracking-wide',
         className
       )}
       {...props}
@@ -36,28 +37,19 @@ const components = {
   ),
   h4: ({ className, ...props }) => (
     <h4
-      className={cn(
-        'mt-8 scroll-m-20 text-xl font-semibold tracking-tight',
-        className
-      )}
+      className={cn('font-heading mt-8 scroll-m-20 text-xl', className)}
       {...props}
     />
   ),
   h5: ({ className, ...props }) => (
     <h5
-      className={cn(
-        'mt-8 scroll-m-20 text-lg font-semibold tracking-tight',
-        className
-      )}
+      className={cn('font-heading mt-8 scroll-m-20 text-lg', className)}
       {...props}
     />
   ),
   h6: ({ className, ...props }) => (
     <h6
-      className={cn(
-        'mt-8 scroll-m-20 text-base font-semibold tracking-tight',
-        className
-      )}
+      className={cn('font-heading mt-8 scroll-m-20 text-base', className)}
       {...props}
     />
   ),
@@ -147,7 +139,13 @@ const components = {
       {...props}
     />
   ),
-  Image: ({ ...props }) => <Image {...props} />,
+  Image: ({ className, alt, ...props }) => (
+    <Image
+      className={cn('rounded-md border', className)}
+      alt={alt}
+      {...props}
+    />
+  ),
   Callout,
   Card: MdxCard,
 }

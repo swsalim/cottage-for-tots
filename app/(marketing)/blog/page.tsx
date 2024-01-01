@@ -10,22 +10,27 @@ export const metadata = {
 }
 
 export default async function BlogPage() {
-  const posts = allPosts
-    .filter((post) => post.published)
-    .sort((a, b) => {
+  let posts
+
+  if (process.env.NODE_ENV === 'development') {
+    posts = allPosts.sort((a, b) => {
       return compareDesc(new Date(a.date), new Date(b.date))
     })
+  } else {
+    posts = allPosts
+      .filter((post) => post.published)
+      .sort((a, b) => {
+        return compareDesc(new Date(a.date), new Date(b.date))
+      })
+  }
 
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="font-heading inline-block text-4xl tracking-tight text-zinc-900 lg:text-5xl">
-            Blog
+          <h1 className="font-heading inline-block text-4xl  text-slate-900 lg:text-5xl">
+            Blog Posts
           </h1>
-          <p className="text-xl text-zinc-500">
-            A blog built using Contentlayer. Posts are written in MDX.
-          </p>
         </div>
       </div>
       <hr className="my-8" />
@@ -37,21 +42,28 @@ export default async function BlogPage() {
               className="group relative flex flex-col space-y-2"
             >
               {post.image && (
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  width={804}
-                  height={452}
-                  className="bg-muted rounded-md border transition-colors"
-                  priority={index <= 1}
-                />
+                <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[3/2]">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="100vw"
+                    className="w-full rounded-lg bg-zinc-100 object-cover"
+                    priority={index <= 1}
+                  />
+                  <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
+                </div>
               )}
-              <h2 className="text-2xl font-extrabold">{post.title}</h2>
+              <h2 className="font-heading text-2xl font-extrabold">
+                {post.title}
+              </h2>
               {post.description && (
-                <p className="text-zinc-500">{post.description}</p>
+                <p className="text-slate-500">{post.description}</p>
               )}
               {post.date && (
-                <p className="text-sm text-zinc-500">{formatDate(post.date)}</p>
+                <p className="text-sm text-slate-500">
+                  {formatDate(post.date)}
+                </p>
               )}
               <Link href={post.slug} className="absolute inset-0">
                 <span className="sr-only">View Article</span>

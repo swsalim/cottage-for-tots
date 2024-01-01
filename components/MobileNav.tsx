@@ -21,10 +21,12 @@ export function MobileNav({ items, children }: MobileNavProps) {
         'fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden'
       )}
     >
-      <div className="relative z-20 grid gap-6 rounded-md bg-white p-4 text-zinc-700 shadow-md">
+      <div className="relative z-20 grid gap-6 rounded-md bg-white p-4 text-slate-700 shadow-md">
         <Link href="/" className="flex items-center space-x-2">
           <Logo />
-          <span className="font-bold text-zinc-900">{siteConfig.siteName}</span>
+          <span className="font-bold text-slate-900">
+            {siteConfig.siteName}
+          </span>
         </Link>
         <nav className="grid grid-flow-row auto-rows-max text-sm">
           {items.map((item, index) => (

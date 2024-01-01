@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Image from 'next/image'
 import Script from 'next/script'
+import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 
 import { cn } from '@/lib/utils'
@@ -71,7 +72,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn('antialiased', GeistSans.variable, fontHeading.variable)}
+      className={cn(
+        'antialiased',
+        GeistSans.variable,
+        GeistMono.variable,
+        fontHeading.variable
+      )}
     >
       <head>
         <Script
@@ -81,7 +87,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-[#f78e86]/10 font-sans">
+      <body className="flex min-h-screen flex-col bg-slate-50 font-sans">
         {children}
         <script
           async

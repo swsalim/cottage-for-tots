@@ -13,7 +13,7 @@ function MobileNavLink({ children, ...props }) {
   return (
     <Popover.Button
       as={Link}
-      className="block text-base leading-7 tracking-tight text-zinc-700"
+      className="block text-base leading-7 tracking-tight text-slate-700"
       {...props}
     >
       {children}
@@ -80,7 +80,7 @@ export default function Header() {
             {({ open }) => (
               <>
                 <Popover.Button
-                  className="relative z-10 -mx-2 inline-flex items-center rounded-lg stroke-zinc-900 p-2 hover:bg-zinc-200/50 hover:stroke-zinc-600 active:stroke-zinc-900 [&:not(:focus-visible)]:focus:outline-none"
+                  className="relative z-10 -mx-2 inline-flex items-center rounded-lg stroke-slate-900 p-2 hover:bg-slate-200/50 hover:stroke-slate-600 active:stroke-slate-900 [&:not(:focus-visible)]:focus:outline-none"
                   aria-label="Toggle site navigation">
                   {({ open }) =>
                     open ? (
@@ -99,7 +99,7 @@ export default function Header() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-0 bg-zinc-300/60 backdrop-blur"
+                        className="fixed inset-0 z-0 bg-slate-300/60 backdrop-blur"
                       />
                       <Popover.Panel
                         static
@@ -111,8 +111,8 @@ export default function Header() {
                           y: -32,
                           transition: { duration: 0.2 },
                         }}
-                        className="absolute inset-x-0 top-0 z-0 origin-top space-y-4 rounded-b-2xl bg-white px-6 pb-6 pt-20 shadow-2xl shadow-zinc-900/20">
-                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-zinc-500">
+                        className="absolute inset-x-0 top-0 z-0 origin-top space-y-4 rounded-b-2xl bg-white px-6 pb-6 pt-20 shadow-2xl shadow-slate-900/20">
+                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-500">
                           {navSpecialities.title}
                         </h3>
                         <div className="space-y-4">
@@ -127,7 +127,7 @@ export default function Header() {
                           })}
                         </div>
                         <hr />
-                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-zinc-500">
+                        <h3 className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-500">
                           {navCategories.title}
                         </h3>
                         <div className="space-y-4">

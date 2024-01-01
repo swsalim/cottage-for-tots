@@ -7,11 +7,11 @@ export default function Footer() {
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 py-8 text-center">
-        <p className="text-sm leading-5 text-zinc-900">
+        <p className="text-sm leading-5 text-slate-900">
           &copy; {` `}
           {new Date().getFullYear()} {` `}
           cottagefortots.com.
-          <span className="ml-2 mt-0 inline-block text-zinc-900">
+          <span className="ml-2 mt-0 inline-block text-slate-900">
             Built by{' '}
             <a
               href="https://www.yuurrific.com"
@@ -22,11 +22,11 @@ export default function Footer() {
             </a>
             .
           </span>
-          <span className="mt-2 block text-zinc-900 md:ml-2 md:mt-0 md:inline-block">
+          <span className="mt-2 block text-slate-900 md:ml-2 md:mt-0 md:inline-block">
             Privacy-friendly analytics by{' '}
             <Link
               href="/get/simpleanalytics"
-              className="inline-block rotate-0 bg-blue-600 px-2 py-1 text-zinc-100 transition duration-100 ease-out hover:-rotate-3 hover:ease-in"
+              className="inline-block rotate-0 rounded-md bg-blue-600 px-2 py-1 text-slate-100 transition duration-100 ease-out hover:-rotate-3 hover:ease-in"
               target="_blank"
             >
               SimpleAnalytics

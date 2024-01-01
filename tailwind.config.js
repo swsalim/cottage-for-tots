@@ -19,6 +19,7 @@ const config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
         heading: ['var(--font-heading)', ...defaultTheme.fontFamily.sans],
       },
     },

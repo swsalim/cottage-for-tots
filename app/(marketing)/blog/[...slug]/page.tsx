@@ -80,9 +80,17 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   PostPageProps['params'][]
 > {
-  return allPosts.map((post) => ({
-    slug: post.slugAsParams.split('/'),
-  }))
+  if (process.env.NODE_ENV === 'development') {
+    return allPosts.map((post) => ({
+      slug: post.slugAsParams.split('/'),
+    }))
+  } else {
+    return allPosts
+      .filter((post) => post.published)
+      .map((post) => ({
+        slug: post.slugAsParams.split('/'),
+      }))
+  }
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -110,11 +118,11 @@ export default async function PostPage({ params }: PostPageProps) {
       </Link>
       <div>
         {post.date && (
-          <time dateTime={post.date} className="block text-sm text-zinc-500">
+          <time dateTime={post.date} className="block text-sm text-slate-500">
             Published on {formatDate(post.date)}
           </time>
         )}
-        <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
+        <h1 className="font-heading mt-2 inline-block text-4xl leading-snug tracking-wide lg:text-5xl">
           {post.title}
         </h1>
         {authors?.length ? (
@@ -137,7 +145,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
                   <div className="flex-1 text-left leading-tight">
                     <p className="font-medium">{author.title}</p>
-                    <p className="text-[12px] text-zinc-500">
+                    <p className="text-[12px] text-slate-500">
                       @{author.twitter}
                     </p>
                   </div>
