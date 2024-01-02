@@ -11,7 +11,7 @@ const components = {
   h1: ({ className, ...props }) => (
     <h1
       className={cn(
-        'mt-2 scroll-m-20 text-4xl font-bold tracking-normal',
+        'mt-2 scroll-m-20 text-4xl tracking-normal',
         className
       )}
       {...props}

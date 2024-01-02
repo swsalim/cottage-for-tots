@@ -19,7 +19,7 @@ export default function Home() {
             className="object-contain"
           />
         </div>
-        <h1 className="font-heading mx-auto my-0 text-center text-4xl font-bold leading-10 tracking-wide text-slate-900 sm:text-5xl sm:leading-none md:text-6xl">
+        <h1 className="font-heading mx-auto my-0 text-center text-4xl leading-10 tracking-wide text-slate-900 sm:text-5xl sm:leading-none md:text-6xl">
           Welcome to Cottage for Tots
         </h1>
         <p className="mx-auto my-2 max-w-3xl text-center text-xl leading-7 text-slate-900 md:my-4">

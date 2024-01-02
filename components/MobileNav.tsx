@@ -24,7 +24,7 @@ export function MobileNav({ items, children }: MobileNavProps) {
       <div className="relative z-20 grid gap-6 rounded-md bg-white p-4 text-slate-700 shadow-md">
         <Link href="/" className="flex items-center space-x-2">
           <Logo />
-          <span className="font-bold text-slate-900">
+          <span className="font-semibold text-slate-900">
             {siteConfig.siteName}
           </span>
         </Link>

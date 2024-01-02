@@ -54,7 +54,7 @@ export default async function BlogPage() {
                   <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
                 </div>
               )}
-              <h2 className="font-heading text-2xl font-extrabold">
+              <h2 className="font-heading text-2xl">
                 {post.title}
               </h2>
               {post.description && (
