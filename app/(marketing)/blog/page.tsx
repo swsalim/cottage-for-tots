@@ -4,6 +4,7 @@ import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 
 import { formatDate } from '@/lib/utils'
+import ImageKit from '@/components/ImageKit'
 
 export const metadata = {
   title: 'Blog',
@@ -43,20 +44,31 @@ export default async function BlogPage() {
             >
               {post.image && (
                 <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[3/2]">
-                  <Image
-                    src={post.image}
+                  <ImageKit
+                    src={`${process.env.NEXT_PUBLIC_IMAGEKIT_BLOG_URL}/${post.image}`}
                     alt={post.title}
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="w-full rounded-lg bg-zinc-100 object-cover"
                     priority={index <= 1}
                   />
                   <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
                 </div>
               )}
-              <h2 className="font-heading text-2xl">
-                {post.title}
-              </h2>
+              {/* {post.image && (
+                <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[3/2]">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-full rounded-lg bg-zinc-100 object-cover"
+                    priority={index <= 1}
+                  />
+                  <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
+                </div>
+              )} */}
+              <h2 className="font-heading text-2xl">{post.title}</h2>
               {post.description && (
                 <p className="text-slate-500">{post.description}</p>
               )}

@@ -6,12 +6,12 @@ import { Mdx } from '@/components/MdxComponents'
 import '@/styles/mdx.css'
 
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeftIcon } from 'lucide-react'
 
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
 import { buttonVariants } from '@/components/Button'
+import ImageKit from '@/components/ImageKit'
 
 interface PostPageProps {
   params: {
@@ -135,8 +135,8 @@ export default async function PostPage({ params }: PostPageProps) {
                   className="flex items-center space-x-2 text-sm"
                 >
                   <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                    <Image
-                      src={author.avatar}
+                    <ImageKit
+                      src={`${process.env.NEXT_PUBLIC_IMAGEKIT_AUTHOR_URL}/${author.avatar}`}
                       alt={author.title}
                       fill
                       className="bg-white object-cover"
@@ -156,8 +156,8 @@ export default async function PostPage({ params }: PostPageProps) {
         ) : null}
       </div>
       {post.image && (
-        <Image
-          src={post.image}
+        <ImageKit
+          src={`${process.env.NEXT_PUBLIC_IMAGEKIT_BLOG_URL}/${post.image}`}
           alt={post.title}
           width={720}
           height={405}
