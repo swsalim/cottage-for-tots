@@ -5,7 +5,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: 'stats.cottagefortots.com', port: '' },
       { protocol: 'https', hostname: 'ik.imagekit.io', port: '' },

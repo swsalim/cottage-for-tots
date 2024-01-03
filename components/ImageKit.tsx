@@ -15,7 +15,20 @@ interface ImageKitProps extends ImageProps {
 export default function ImageKit({
   src = 'default-image.jpg',
   alt = 'Default image',
+  directory = '',
+  width = 400,
+  height = 400,
   ...props
 }: ImageKitProps) {
-  return <Image loader={imageKitLoader} src={src} alt={alt} {...props} />
+  const imageSrc = directory ? `${directory}/${src}` : src
+  return (
+    <Image
+      loader={imageKitLoader}
+      src={imageSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      {...props}
+    />
+  )
 }

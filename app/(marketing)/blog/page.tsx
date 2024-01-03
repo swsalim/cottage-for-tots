@@ -43,31 +43,17 @@ export default async function BlogPage() {
               className="group relative flex flex-col space-y-2"
             >
               {post.image && (
-                <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[3/2]">
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg sm:aspect-[2/1] lg:aspect-[3/2]">
                   <ImageKit
-                    src={`${process.env.NEXT_PUBLIC_IMAGEKIT_BLOG_URL}/${post.image}`}
+                    src={post.image}
                     alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="w-full rounded-lg bg-zinc-100 object-cover"
+                    directory="CottageForTots/Blog"
+                    className="w-full  bg-zinc-100 object-cover"
                     priority={index <= 1}
                   />
                   <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
                 </div>
               )}
-              {/* {post.image && (
-                <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[3/2]">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="w-full rounded-lg bg-zinc-100 object-cover"
-                    priority={index <= 1}
-                  />
-                  <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
-                </div>
-              )} */}
               <h2 className="font-heading text-2xl">{post.title}</h2>
               {post.description && (
                 <p className="text-slate-500">{post.description}</p>

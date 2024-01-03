@@ -136,9 +136,9 @@ export default async function PostPage({ params }: PostPageProps) {
                 >
                   <div className="relative h-10 w-10 overflow-hidden rounded-full">
                     <ImageKit
-                      src={`${process.env.NEXT_PUBLIC_IMAGEKIT_AUTHOR_URL}/${author.avatar}`}
+                      src={author.avatar}
+                      directory="CottageForTots/Author"
                       alt={author.title}
-                      fill
                       className="bg-white object-cover"
                     />
                   </div>
@@ -156,14 +156,17 @@ export default async function PostPage({ params }: PostPageProps) {
         ) : null}
       </div>
       {post.image && (
-        <ImageKit
-          src={`${process.env.NEXT_PUBLIC_IMAGEKIT_BLOG_URL}/${post.image}`}
-          alt={post.title}
-          width={720}
-          height={405}
-          className="bg-muted my-8 rounded-md border transition-colors"
-          priority
-        />
+        <div className="aspect-h-3 aspect-w-4 relative my-8 overflow-hidden rounded-md border">
+          <ImageKit
+            directory="CottageForTots/Blog"
+            src={post.image}
+            alt={post.title}
+            width={700}
+            height={700}
+            className="object-cover"
+            priority
+          />
+        </div>
       )}
       <Mdx code={post.body.code} />
       <hr className="mt-12" />

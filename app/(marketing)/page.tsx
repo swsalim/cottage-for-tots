@@ -1,10 +1,9 @@
 'use client'
 
-import Image from 'next/image'
-
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/Button'
 import Container from '@/components/Container'
+import ImageKit from '@/components/ImageKit'
 
 export default function Home() {
   return (
@@ -12,11 +11,13 @@ export default function Home() {
       <div className="hero-banner w-full-h-full absolute inset-0 -z-10"></div>
       <Container className="pb-12 pt-20 md:py-40">
         <div className="relative mx-auto mb-6 h-48 w-48 overflow-hidden rounded-full">
-          <Image
-            src="/images/logo.jpeg"
+          <ImageKit
+            src="logo.png"
+            directory="CottageForTots"
             alt="Cottage for Tots"
-            fill
             className="object-contain"
+            width={192}
+            height={192}
           />
         </div>
         <h1 className="font-heading mx-auto my-0 text-center text-4xl leading-10 tracking-wide text-slate-900 sm:text-5xl sm:leading-none md:text-6xl">

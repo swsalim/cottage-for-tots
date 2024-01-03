@@ -1,6 +1,5 @@
-import Image from 'next/image'
-
 import { cn } from '@/lib/utils'
+import ImageKit from '@/components/ImageKit'
 
 export default function Logo({ className }: { className?: string }) {
   return (
@@ -12,11 +11,12 @@ export default function Logo({ className }: { className?: string }) {
           className
         )}
       >
-        <Image
-          src="/images/logo.jpeg"
+        <ImageKit
+          src="logo.png"
+          directory="CottageForTots"
+          width={48}
+          height={48}
           alt="Cottage for Tots"
-          fill
-          sizes="100vw"
           className="object-cover"
         />
       </div>
