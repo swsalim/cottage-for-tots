@@ -13,7 +13,7 @@ export default function Home() {
       <Container className="pb-12 pt-20 md:py-40">
         <div className="relative mx-auto mb-6 h-48 w-48 overflow-hidden rounded-full">
           <Image
-            src="/images/logo.svg"
+            src="/images/logo.jpeg"
             alt="Cottage for Tots"
             fill
             className="object-contain"
