@@ -13,7 +13,7 @@ export default function Logo({ className }: { className?: string }) {
         )}
       >
         <Image
-          src="/images/logo.svg"
+          src="/images/logo.jpeg"
           alt="Cottage for Tots"
           fill
           sizes="100vw"
