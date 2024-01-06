@@ -10,17 +10,14 @@ import { MdxCard } from '@/components/MdxCard'
 const components = {
   h1: ({ className, ...props }) => (
     <h1
-      className={cn(
-        'mt-2 scroll-m-20 text-4xl tracking-normal',
-        className
-      )}
+      className={cn('mt-2 scroll-m-20 text-4xl tracking-normal', className)}
       {...props}
     />
   ),
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        'font-heading mt-10 scroll-m-20 border-b pb-1 text-3xl tracking-wide first:mt-0',
+        'font-heading scroll-m-20 border-b pb-1 leading-snug tracking-wide',
         className
       )}
       {...props}
@@ -28,43 +25,20 @@ const components = {
   ),
   h3: ({ className, ...props }) => (
     <h3
-      className={cn(
-        'font-heading mt-8 scroll-m-20 text-2xl tracking-wide',
-        className
-      )}
+      className={cn('font-heading mt-8 scroll-m-20 tracking-wide', className)}
       {...props}
     />
   ),
   h4: ({ className, ...props }) => (
-    <h4
-      className={cn('font-heading mt-8 scroll-m-20 text-xl', className)}
-      {...props}
-    />
+    <h4 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
   ),
   h5: ({ className, ...props }) => (
-    <h5
-      className={cn('font-heading mt-8 scroll-m-20 text-lg', className)}
-      {...props}
-    />
+    <h5 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
   ),
   h6: ({ className, ...props }) => (
-    <h6
-      className={cn('font-heading mt-8 scroll-m-20 text-base', className)}
-      {...props}
-    />
+    <h6 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
   ),
-  a: ({ className, ...props }) => (
-    <a
-      className={cn('font-medium underline underline-offset-4', className)}
-      {...props}
-    />
-  ),
-  p: ({ className, ...props }) => (
-    <p
-      className={cn('leading-7 [&:not(:first-child)]:mt-6', className)}
-      {...props}
-    />
-  ),
+  p: ({ className, ...props }) => <p className={cn(className)} {...props} />,
   ul: ({ className, ...props }) => (
     <ul className={cn('my-6 ml-6 list-disc', className)} {...props} />
   ),
@@ -158,7 +132,7 @@ export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code)
 
   return (
-    <div className="mdx">
+    <div className="mdx prose-zinc prose">
       <Component components={components} />
     </div>
   )

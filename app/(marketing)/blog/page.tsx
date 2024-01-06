@@ -43,7 +43,7 @@ export default async function BlogPage() {
               className="group relative flex flex-col space-y-2"
             >
               {post.image && (
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg sm:aspect-[2/1] lg:aspect-[3/2]">
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg sm:aspect-[3/2]">
                   <ImageKit
                     src={post.image}
                     alt={post.title}
