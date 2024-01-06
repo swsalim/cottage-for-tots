@@ -1,13 +1,49 @@
-import Image from 'next/image'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 
+import { siteConfig } from '@/config/site'
 import { formatDate } from '@/lib/utils'
 import ImageKit from '@/components/ImageKit'
 
-export const metadata = {
-  title: 'Blog',
+const config = {
+  title: 'Blog Posts',
+  description:
+    'Delve into the world of early learning where creativity meets curiosity.',
+  url: '/blog',
+}
+
+export const metadata: Metadata = {
+  title: config.title,
+  description: config.description,
+  alternates: {
+    canonical: config.url,
+  },
+  openGraph: {
+    title: config.title,
+    description: config.description,
+    url: config.url,
+    images: [
+      {
+        url: new URL(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`
+        ),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: siteConfig.openGraph.imageAlt,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: config.title,
+    description: config.description,
+    card: 'summary_large_image',
+    creator: siteConfig.creator,
+    images: [siteConfig.openGraph.image],
+  },
 }
 
 export default async function BlogPage() {

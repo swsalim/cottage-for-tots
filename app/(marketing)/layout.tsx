@@ -8,10 +8,6 @@ import { MainNav } from '@/components/MainNav'
 export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
-  openGraph: {
-    title: siteConfig.title,
-    description: siteConfig.description,
-  },
 }
 
 interface MarketingLayoutProps {
