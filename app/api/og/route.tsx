@@ -25,8 +25,8 @@ export async function GET(req: NextRequest) {
             <div tw="flex flex-col justify-between w-full h-full p-20">
               <div tw="flex flex-col">
                 <h1 tw="text-[60px] text-slate-800 text-left mb-0">{title}</h1>
-                <p tw="text-slate-800 uppercase mt-4 text-xl">
-                  cottagefortots.com
+                <p tw="text-slate-800 mt-4 text-xl">
+                  CottageForTots.com
                 </p>
               </div>
             </div>
