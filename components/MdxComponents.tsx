@@ -11,24 +11,24 @@ import { MdxCard } from '@/components/MdxCard'
 const components = {
   h1: ({ className, ...props }) => (
     <h1
-      className={cn('mt-2 scroll-m-20 text-3xl sm:text-4xl tracking-normal', className)}
+      className={cn(
+        'mt-2 scroll-m-20 text-3xl tracking-normal sm:text-4xl',
+        className
+      )}
       {...props}
     />
   ),
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        'font-heading scroll-m-20 border-b pb-1 leading-tight tracking-wider',
+        'font-heading scroll-m-20 border-b pb-1 leading-tight',
         className
       )}
       {...props}
     />
   ),
   h3: ({ className, ...props }) => (
-    <h3
-      className={cn('font-heading mt-8 scroll-m-20 tracking-wide', className)}
-      {...props}
-    />
+    <h3 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
   ),
   h4: ({ className, ...props }) => (
     <h4 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
@@ -123,7 +123,7 @@ const components = {
   ),
   Callout,
   Card: MdxCard,
-  Link
+  Link,
 }
 
 interface MdxProps {

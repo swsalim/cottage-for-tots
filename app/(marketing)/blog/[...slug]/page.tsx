@@ -122,7 +122,7 @@ export default async function PostPage({ params }: PostPageProps) {
             Published on {formatDate(post.date)}
           </time>
         )}
-        <h1 className="font-heading mt-2 inline-block text-3xl sm:text-4xl leading-tight tracking-wide lg:text-5xl lg:leading-tight">
+        <h1 className="font-heading mt-2 inline-block text-3xl leading-tight sm:text-4xl lg:text-5xl lg:leading-tight">
           {post.title}
         </h1>
         {authors?.length ? (
