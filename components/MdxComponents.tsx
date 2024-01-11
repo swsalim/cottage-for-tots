@@ -1,11 +1,11 @@
 // @ts-nocheck
 import * as React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { cn } from '@/lib/utils'
 import { Callout } from '@/components/Callout'
+import ImageKit from '@/components/ImageKit'
 import { MdxCard } from '@/components/MdxCard'
 
 const components = {
@@ -114,9 +114,9 @@ const components = {
       {...props}
     />
   ),
-  Image: ({ className, alt, ...props }) => (
-    <Image
-      className={cn('rounded-md border', className)}
+  ImageKit: ({ className, alt, ...props }) => (
+    <ImageKit
+      className={cn('mx-auto rounded-md border', className)}
       alt={alt}
       {...props}
     />
