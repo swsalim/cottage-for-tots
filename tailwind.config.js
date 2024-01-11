@@ -104,19 +104,26 @@ const config = {
           // Headings
           'h2, h3': {
             color: 'var(--tw-prose-headings)',
-            fontWeight: theme('fontWeight.semibold'),
           },
           h2: {
             lineHeight: theme('lineHeight.7'),
-            fontSize: theme('fontSize.3xl')[0],
+            fontSize: theme('fontSize.2xl')[0],
             marginTop: theme('spacing.12'),
             marginBottom: theme('spacing.4'),
+
+            '@media (min-width: 640px)': {
+              fontSize: theme('fontSize.4xl')[0],
+            },
           },
           h3: {
-            fontSize: theme('fontSize.2xl')[0],
+            fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.8'),
             marginTop: theme('spacing.10'),
             marginBottom: theme('spacing.4'),
+
+            '@media (min-width: 640px)': {
+              fontSize: theme('fontSize.2xl')[0],
+            },
           },
           h4: {
             fontSize: theme('fontSize.xl')[0],
