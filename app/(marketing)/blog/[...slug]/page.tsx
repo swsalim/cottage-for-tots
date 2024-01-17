@@ -74,6 +74,9 @@ export async function generateMetadata({
       description: post.description,
       images: [ogUrl.toString()],
     },
+    alternates: {
+      canonical: absoluteUrl(post.slug),
+    },
   }
 }
 

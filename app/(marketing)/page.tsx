@@ -13,16 +13,18 @@ export default function Home() {
   let posts
 
   if (process.env.NODE_ENV === 'development') {
-    posts = allPosts.slice(0, 5).sort((a, b) => {
-      return compareDesc(new Date(a.date), new Date(b.date))
-    })
+    posts = allPosts
+      .sort((a, b) => {
+        return compareDesc(new Date(a.date), new Date(b.date))
+      })
+      .slice(0, 10)
   } else {
     posts = allPosts
-      .slice(0, 5)
       .filter((post) => post.published)
       .sort((a, b) => {
         return compareDesc(new Date(a.date), new Date(b.date))
       })
+      .slice(0, 10)
   }
 
   return (
@@ -71,19 +73,19 @@ export default function Home() {
           </div>
 
           {posts?.length ? (
-            <div className="mx-auto my-16 max-w-4xl space-y-20 lg:mt-20 lg:space-y-20">
+            <div className="mx-auto my-16 max-w-6xl space-y-20 lg:mt-20 lg:space-y-20">
               {posts.map((post, index) => (
                 <article
                   key={post._id}
                   className="relative isolate flex flex-col gap-8 lg:flex-row"
                 >
                   {post.image && (
-                    <div className="lg:aspect-square relative aspect-[16/9] sm:aspect-[2/1] lg:w-64 lg:shrink-0">
+                    <div className="aspect-h-3 aspect-w-4 relative w-full shrink-0 overflow-hidden rounded-md border sm:aspect-h-2 lg:aspect-h-1 lg:w-1/3 ">
                       <ImageKit
                         src={post.image}
                         alt={post.title}
                         directory="CottageForTots/Blog"
-                        className="w-full rounded-lg bg-slate-100 object-cover"
+                        className="rounded-lg bg-slate-100 object-cover"
                         priority={index <= 1}
                       />
                       <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-slate-900/10" />
