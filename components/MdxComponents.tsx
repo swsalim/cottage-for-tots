@@ -20,10 +20,7 @@ const components = {
   ),
   h2: ({ className, ...props }) => (
     <h2
-      className={cn(
-        'font-heading scroll-m-20 border-b pb-1 leading-tight',
-        className
-      )}
+      className={cn('font-heading scroll-m-20 leading-tight', className)}
       {...props}
     />
   ),
