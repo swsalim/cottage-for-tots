@@ -84,10 +84,10 @@ export default async function BlogPage() {
                     src={post.image}
                     alt={post.title}
                     directory="CottageForTots/Blog"
-                    className="w-full  bg-zinc-100 object-cover"
+                    className="w-full  bg-slate-100 object-cover"
                     priority={index <= 1}
                   />
-                  <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-zinc-900/10" />
+                  <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-slate-900/10" />
                 </div>
               )}
               <h2 className="font-heading text-2xl">{post.title}</h2>
