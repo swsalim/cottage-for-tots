@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Image from 'next/image'
 import Script from 'next/script'
-import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 
 import { cn } from '@/lib/utils'
@@ -72,12 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(
-        'antialiased',
-        GeistSans.variable,
-        GeistMono.variable,
-        fontHeading.variable
-      )}
+      className={cn('antialiased', GeistSans.variable, fontHeading.variable)}
     >
       <head>
         <Script

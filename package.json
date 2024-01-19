@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "unused": "next-unused"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -21,7 +22,7 @@
     "concurrently": "^8.2.2",
     "contentlayer": "^0.3.4",
     "framer-motion": "^10.16.16",
-    "geist": "^1.2.0",
+    "geist": "^1.2.1",
     "lucide-react": "^0.303.0",
     "next": "14.0.4",
     "next-contentlayer": "^0.3.4",
@@ -46,6 +47,7 @@
     "eslint-config-next": "14.0.4",
     "eslint-plugin-tailwindcss": "^3.13.1",
     "mdast-util-toc": "^7.0.0",
+    "next-unused": "^0.0.6",
     "postcss": "^8",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
@@ -59,5 +61,19 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5",
     "unist-util-visit": "^5.0.0"
+  },
+  "next-unused": {
+    "debug": true,
+    "include": [
+      "app",
+      "components",
+      "config",
+      "hooks",
+      "lib",
+      "styles"
+    ],
+    "entrypoints": [
+      "app"
+    ]
   }
 }
