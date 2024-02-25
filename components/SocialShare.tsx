@@ -31,7 +31,10 @@ export function SocialShare({ title, url, image }: SocialShareProps) {
       <LinkedinShareButton url={absoluteUrl(url)}>
         <LinkedinIcon size={32} round />
       </LinkedinShareButton>
-      <PinterestShareButton url={absoluteUrl(url)} media={image}>
+      <PinterestShareButton
+        url={absoluteUrl(url)}
+        media={`https://ik.imagekit.io/yuurrific/CottageForTots/Blog/${image}`}
+      >
         <PinterestIcon size={32} round />
       </PinterestShareButton>
     </div>
