@@ -12,6 +12,7 @@ import { ChevronLeftIcon } from 'lucide-react'
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
 import { buttonVariants } from '@/components/Button'
 import ImageKit from '@/components/ImageKit'
+import { SocialShare } from '@/components/SocialShare'
 
 interface PostPageProps {
   params: {
@@ -125,7 +126,7 @@ export default async function PostPage({ params }: PostPageProps) {
             Published on {formatDate(post.date)}
           </time>
         )}
-        <h1 className="font-heading mt-2 inline-block text-3xl leading-tight sm:text-4xl lg:text-5xl lg:leading-tight">
+        <h1 className="mt-2 inline-block font-heading text-3xl leading-tight sm:text-4xl lg:text-5xl lg:leading-tight">
           {post.title}
         </h1>
         {authors?.length ? (
@@ -172,6 +173,9 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       )}
       <Mdx code={post.body.code} />
+
+      <SocialShare title={post.title} url={post.slug} image={post.image} />
+
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
