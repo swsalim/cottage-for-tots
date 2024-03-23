@@ -5,7 +5,7 @@ import { compareDesc } from 'date-fns'
 
 import { siteConfig } from '@/config/site'
 import { formatDate } from '@/lib/utils'
-import ImageKit from '@/components/ImageKit'
+import { ImageKit } from '@/components/ImageKit'
 
 const config = {
   title: 'Blog Posts',
@@ -65,7 +65,7 @@ export default async function BlogPage() {
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="font-heading inline-block text-4xl  text-slate-900 lg:text-5xl">
+          <h1 className="inline-block font-heading text-4xl  text-slate-900 lg:text-5xl">
             Blog Posts
           </h1>
         </div>

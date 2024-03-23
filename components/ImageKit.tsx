@@ -12,7 +12,7 @@ interface ImageKitProps extends ImageProps {
   directory?: string
 }
 
-export default function ImageKit({
+export function ImageKit({
   src = 'default-image.jpg',
   alt = 'Default image',
   directory = '',

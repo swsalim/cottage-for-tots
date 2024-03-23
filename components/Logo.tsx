@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import ImageKit from '@/components/ImageKit'
+import { ImageKit } from '@/components/ImageKit'
 
 export default function Logo({ className }: { className?: string }) {
   return (

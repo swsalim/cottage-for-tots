@@ -5,7 +5,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { cn } from '@/lib/utils'
 import { Callout } from '@/components/Callout'
-import ImageKit from '@/components/ImageKit'
+import { ImageKit } from '@/components/ImageKit'
 import { MdxCard } from '@/components/MdxCard'
 
 const components = {
@@ -20,21 +20,21 @@ const components = {
   ),
   h2: ({ className, ...props }) => (
     <h2
-      className={cn('font-heading scroll-m-20 leading-tight', className)}
+      className={cn('scroll-m-20 font-heading leading-tight', className)}
       {...props}
     />
   ),
   h3: ({ className, ...props }) => (
-    <h3 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
+    <h3 className={cn('mt-8 scroll-m-20 font-heading', className)} {...props} />
   ),
   h4: ({ className, ...props }) => (
-    <h4 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
+    <h4 className={cn('mt-8 scroll-m-20 font-heading', className)} {...props} />
   ),
   h5: ({ className, ...props }) => (
-    <h5 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
+    <h5 className={cn('mt-8 scroll-m-20 font-heading', className)} {...props} />
   ),
   h6: ({ className, ...props }) => (
-    <h6 className={cn('font-heading mt-8 scroll-m-20', className)} {...props} />
+    <h6 className={cn('mt-8 scroll-m-20 font-heading', className)} {...props} />
   ),
   p: ({ className, ...props }) => <p className={cn(className)} {...props} />,
   ul: ({ className, ...props }) => (
