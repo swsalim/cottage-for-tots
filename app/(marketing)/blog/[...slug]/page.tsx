@@ -108,9 +108,16 @@ export default async function PostPage({ params }: PostPageProps) {
   let posts
 
   if (process.env.NODE_ENV === 'development') {
-    posts = allPosts.slice(0, 3)
+    posts = allPosts
+      .filter((post) => post.slugAsParams !== params.slug[0])
+      .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
+      .slice(0, 3)
   } else {
-    posts = allPosts.filter((post) => post.published).slice(0, 3)
+    posts = allPosts
+      .filter((post) => post.published)
+      .filter((post) => post.slugAsParams !== params.slug[0])
+      .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
+      .slice(0, 3)
   }
 
   const authors = post.authors.map((author) =>

@@ -38,13 +38,13 @@ export default function ArticleGrid({ posts }: ArticleGridProps) {
               </time>
             </div>
             <div className="group relative">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-zinc-900 group-hover:text-zinc-600">
+              <h3 className="mt-3 font-heading text-lg leading-6 tracking-wide text-zinc-900 group-hover:text-zinc-600">
                 <Link href={post.slug}>
                   <span className="absolute inset-0" />
                   {post.title}
                 </Link>
               </h3>
-              <p className="mt-4 line-clamp-2 text-sm leading-6 text-zinc-600">
+              <p className="mt-4 line-clamp-2 text-base leading-6 text-zinc-600">
                 {post.description}
               </p>
             </div>
