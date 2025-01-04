@@ -205,7 +205,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </article>
 
-      <div className="relative my-4 bg-slate-100 px-0 py-12 sm:my-8">
+      <div className="relative bg-slate-100 px-0 py-12">
         <div className="relative mx-auto max-w-7xl">
           <div className="text-center">
             <h2 className="font-heading text-3xl capitalize text-slate-900 sm:text-4xl">
