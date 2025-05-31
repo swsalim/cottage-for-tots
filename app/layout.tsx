@@ -84,6 +84,16 @@ export default function RootLayout({
             __html: `window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`,
           }}
         />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="CLyM6zKvWrFOywsjN8xnjA"
+          async
+        ></script>
+        <script
+          src="https://beamanalytics.b-cdn.net/beam.min.js"
+          data-token="c2fbac7b-0b09-48f0-b925-7a5a61de2a3b"
+          async
+        ></script>
       </head>
       <body
         className="flex min-h-screen flex-col bg-slate-50 font-sans"
