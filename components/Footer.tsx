@@ -26,6 +26,41 @@ const projects: Project[] = [
     name: 'RGB to Pantone',
     target: '_blank',
   },
+  {
+    url: 'https://www.randomnumberapp.com/?ref=cottagefortots.com',
+    name: 'Random Number App',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.clinicgeek.com/?ref=cottagefortots.com',
+    name: 'Clinic Geek',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.wateraday.com/?ref=cottagefortots.com',
+    name: 'Water A Day',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.willitraintomorrow.com/?ref=cottagefortots.com',
+    name: 'Will It Rain Tomorrow?',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.indieworldmap.com/?ref=cottagefortots.com',
+    name: 'Indie World Map',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.byeindonesia.com/?ref=cottagefortots.com',
+    name: 'Bye Indonesia',
+    target: '_blank',
+  },
+  {
+    url: 'https://www.dentalclinicclosetome.my/?ref=cottagefortots.com',
+    name: 'Dental Clinic Malaysia',
+    target: '_blank',
+  },
 ]
 
 export default function Footer() {
@@ -35,7 +70,10 @@ export default function Footer() {
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 py-8 text-center">
-        <div className="mb-8 flex flex-col items-center justify-center gap-4 md:mb-4 md:flex-row">
+        <h3 className="mb-4 text-2xl font-bold capitalize tracking-tight text-slate-900 sm:mb-8 sm:text-3xl">
+          Check out our other projects
+        </h3>
+        <div className="mb-10 grid grid-cols-2 items-center justify-center gap-4 md:mb-12 md:grid-cols-4 lg:grid-cols-5">
           {projects.map((project) => (
             <a
               key={project.name}
