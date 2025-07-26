@@ -67,6 +67,11 @@ const projects: Project[] = [
     target: '_blank',
   },
   {
+    url: 'https://www.keywordgap.com/?ref=cottagefortots.com',
+    name: 'Keyword Gap',
+    target: '_blank',
+  },
+  {
     url: 'https://www.dentalclinicclosetome.my/?ref=cottagefortots.com',
     name: 'Dental Clinic Malaysia',
     target: '_blank',
