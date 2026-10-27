@@ -9,10 +9,13 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronLeftIcon } from 'lucide-react'
 
+import { notFoundMetadata } from '@/lib/not-found'
+import { postStructuredData } from '@/lib/schema'
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
 import ArticleGrid from '@/components/ArticleGrid'
 import { buttonVariants } from '@/components/Button'
 import { ImageKit } from '@/components/ImageKit'
+import { JsonLd } from '@/components/JsonLd'
 import { SocialShare } from '@/components/SocialShare'
 
 interface PostPageProps {
@@ -27,7 +30,7 @@ async function getPostFromParams({
   const slug = params?.slug?.join('/')
   const post = allPosts.find((post) => post.slugAsParams === slug)
 
-  if (!post) {
+  if (!post || !post.published) {
     return null
   }
 
@@ -40,7 +43,7 @@ export async function generateMetadata({
   const post = await getPostFromParams({ params })
 
   if (!post) {
-    return {}
+    return notFoundMetadata
   }
 
   const url = process.env.NEXT_PUBLIC_BASE_URL
@@ -82,20 +85,18 @@ export async function generateMetadata({
   }
 }
 
+// Slugs that were not generated must hit the not-found page. Next 14.0.4
+// streams an empty error document when notFound() runs on demand.
+export const dynamicParams = false
+
 export async function generateStaticParams(): Promise<
   PostPageProps['params'][]
 > {
-  if (process.env.NODE_ENV === 'development') {
-    return allPosts.map((post) => ({
+  return allPosts
+    .filter((post) => post.published)
+    .map((post) => ({
       slug: post.slugAsParams.split('/'),
     }))
-  } else {
-    return allPosts
-      .filter((post) => post.published)
-      .map((post) => ({
-        slug: post.slugAsParams.split('/'),
-      }))
-  }
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -105,20 +106,13 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
-  let posts
+  const posts = allPosts
+    .filter((entry) => entry.published)
+    .filter((entry) => entry.slugAsParams !== params.slug[0])
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
+    .slice(0, 3)
 
-  if (process.env.NODE_ENV === 'development') {
-    posts = allPosts
-      .filter((post) => post.slugAsParams !== params.slug[0])
-      .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-      .slice(0, 3)
-  } else {
-    posts = allPosts
-      .filter((post) => post.published)
-      .filter((post) => post.slugAsParams !== params.slug[0])
-      .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-      .slice(0, 3)
-  }
+  const { article, breadcrumb } = postStructuredData(post)
 
   const authors = post.authors.map((author) =>
     allAuthors.find(({ slug }) => slug === `/authors/${author}`)
@@ -126,6 +120,8 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <>
+      <JsonLd data={article} />
+      <JsonLd data={breadcrumb} />
       <article className="container relative max-w-3xl py-6 lg:py-10">
         <Link
           href="/blog"

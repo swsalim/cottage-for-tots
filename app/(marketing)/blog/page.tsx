@@ -47,19 +47,11 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  let posts
-
-  if (process.env.NODE_ENV === 'development') {
-    posts = allPosts.sort((a, b) => {
+  const posts = allPosts
+    .filter((post) => post.published)
+    .sort((a, b) => {
       return compareDesc(new Date(a.date), new Date(b.date))
     })
-  } else {
-    posts = allPosts
-      .filter((post) => post.published)
-      .sort((a, b) => {
-        return compareDesc(new Date(a.date), new Date(b.date))
-      })
-  }
 
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
