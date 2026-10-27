@@ -1,12 +1,16 @@
-const { withContentlayer } = require('next-contentlayer')
+const { withContentlayer } = require('next-contentlayer2')
 
 const redirectList = [
-  { source: '/get/simpleanalytics', destination: 'https://referral.simpleanalytics.com/yuyu' },
+  {
+    source: '/get/simpleanalytics',
+    destination: 'https://referral.simpleanalytics.com/yuyu',
+  },
 ]
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  turbopack: {},
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
@@ -21,10 +25,8 @@ const nextConfig = {
       destination,
       permanent: true,
       statusCode: 301,
-    }));
+    }))
   },
 }
-
-
 
 module.exports = withContentlayer(nextConfig)

@@ -1,23 +1,22 @@
 'use client'
 
-// if using the App router
-import React from 'react'
 import Image, { ImageProps } from 'next/image'
 
 import { imageKitLoader } from '@/lib/utils'
 
-interface ImageKitProps extends ImageProps {
+interface ImageKitProps extends Omit<ImageProps, 'src' | 'alt'> {
   src: string
   alt: string
   directory?: string
 }
 
 export function ImageKit({
-  src = 'default-image.jpg',
-  alt = 'Default image',
+  src,
+  alt,
   directory = '',
-  width = 400,
-  height = 400,
+  width,
+  height,
+  fill,
   ...props
 }: ImageKitProps) {
   const imageSrc = directory ? `${directory}/${src}` : src
@@ -26,8 +25,9 @@ export function ImageKit({
       loader={imageKitLoader}
       src={imageSrc}
       alt={alt}
-      width={width}
-      height={height}
+      {...(fill
+        ? { fill: true }
+        : { width: width ?? 800, height: height ?? 600 })}
       {...props}
     />
   )
