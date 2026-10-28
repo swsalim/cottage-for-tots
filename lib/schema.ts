@@ -11,6 +11,54 @@ export function postImageUrl(filename: string) {
   return `https://ik.imagekit.io/${imagekitId}/${IMAGEKIT_DIRECTORY}/${filename}`
 }
 
+export function blogIndexStructuredData(input: {
+  name: string
+  description: string
+  posts: Pick<Post, 'title' | 'description' | 'date' | 'slug'>[]
+}) {
+  const url = absoluteUrl('/blog')
+  const siteUrl = getSiteUrl()
+
+  return {
+    blog: {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: input.name,
+      url,
+      description: input.description,
+      blogPost: input.posts.map((post) => {
+        const item: Record<string, unknown> = {
+          '@type': 'BlogPosting',
+          headline: post.title,
+          url: absoluteUrl(post.slug),
+        }
+        const published = frontmatterDate(post.date)
+        if (published) item.datePublished = published
+        if (post.description) item.description = post.description
+        return item
+      }),
+    },
+    breadcrumb: {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Blog',
+          item: url,
+        },
+      ],
+    },
+  }
+}
+
 export function homeStructuredData() {
   const url = getSiteUrl()
   const organizationId = `${url}/#organization`
