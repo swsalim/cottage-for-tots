@@ -48,9 +48,9 @@ export default function Home() {
             <Button asChild>
               <Link href="/blog">Read the blog</Link>
             </Button>
-            <Button variant="outline" asChild>
+            {/* <Button variant="outline" asChild>
               <a href={shopeeUrl}>Shop on Shopee</a>
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="mx-auto w-full max-w-sm">

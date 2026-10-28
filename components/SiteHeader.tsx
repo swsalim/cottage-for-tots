@@ -46,9 +46,9 @@ export function SiteHeader() {
               {item.title}
             </Link>
           ))}
-          <Button variant="outline" size="sm" asChild>
+          {/* <Button variant="outline" size="sm" asChild>
             <a href={shopeeUrl}>Shop on Shopee</a>
-          </Button>
+          </Button> */}
         </nav>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
