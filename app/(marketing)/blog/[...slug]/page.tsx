@@ -128,11 +128,13 @@ export default async function PostPage({ params }: PostPageProps) {
       <div
         className={cn(
           'mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 lg:grid-cols-[16rem_minmax(0,1fr)]',
-          sidebar && 'xl:grid-cols-[16rem_minmax(0,1fr)_16rem]'
         )}
       >
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
           <TableOfContents items={toc} />
+          {sidebar ? (
+            <AdSlot placement="post-sidebar" />
+          ) : null}
         </aside>
         <article className="min-w-0">
           <Button variant="ghost" asChild className="mb-6">
@@ -220,13 +222,6 @@ export default async function PostPage({ params }: PostPageProps) {
             <AdSlot placement="post-mobile-anchor" />
           </div>
         </article>
-        {sidebar ? (
-          <aside className="hidden xl:block">
-            <div className="sticky top-24">
-              <AdSlot placement="post-sidebar" />
-            </div>
-          </aside>
-        ) : null}
       </div>
       <section className="border-t bg-muted/40 py-12">
         <div className="mx-auto w-full max-w-6xl px-4">

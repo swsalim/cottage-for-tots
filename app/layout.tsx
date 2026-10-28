@@ -72,23 +72,11 @@ export default function RootLayout({
     >
       <head>
         <link rel="preconnect" href="//ik.imagekit.io" />
-        <link rel="preconnect" href="//stats.cottagefortots.com" />
-        <link rel="dns-prefetch" href="//stats.cottagefortots.com" />
         <link rel="dns-prefetch" href="//ik.imagekit.io" />
-        <Script
-          id="simple-analytics"
-          dangerouslySetInnerHTML={{
-            __html: `window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`,
-          }}
-        />
+
         <script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="CLyM6zKvWrFOywsjN8xnjA"
-          async
-        ></script>
-        <script
-          src="https://beamanalytics.b-cdn.net/beam.min.js"
-          data-token="c2fbac7b-0b09-48f0-b925-7a5a61de2a3b"
           async
         ></script>
       </head>
@@ -97,21 +85,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
-        <script async src="https://stats.cottagefortots.com/latest.js"></script>
-        <script
-          async
-          src="https://stats.cottagefortots.com/auto-events.js"
-        ></script>
-        <noscript>
-          <Image
-            src="https://stats.cottagefortots.com/noscript.gif?collect-dnt=true"
-            alt=""
-            referrerPolicy="no-referrer-when-downgrade"
-            width="1"
-            height="1"
-            unoptimized
-          />
-        </noscript>
+        <script async src="https://cdn.seline.com/seline.js" data-token="f1c0c87f96278c4"></script>
       </body>
     </html>
   )
