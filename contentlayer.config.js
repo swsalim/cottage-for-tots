@@ -1,4 +1,4 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
@@ -101,30 +101,41 @@ export const Page = defineDocumentType(() => ({
   computedFields,
 }))
 
+function rehypeInlineAds() {
+  return (tree) => {
+    if (!Array.isArray(tree.children)) return
+    let headingCount = 0
+    const next = []
+    for (const child of tree.children) {
+      next.push(child)
+      if (child.type === 'element' && child.tagName === 'h2') {
+        headingCount += 1
+        if (headingCount % 3 === 0) {
+          next.push({
+            type: 'element',
+            tagName: 'ad-slot',
+            properties: { placement: 'post-inline' },
+            children: [],
+          })
+        }
+      }
+    }
+    tree.children = next
+  }
+}
+
 export default makeSource({
   contentDirPath: './content',
   documentTypes: [Page, Post, Author],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
+      rehypeInlineAds,
       rehypeSlug,
       [
         rehypePrettyCode,
         {
           theme: 'github-dark',
-          onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: 'text', value: ' ' }]
-            }
-          },
-          onVisitHighlightedLine(node) {
-            node.properties.className.push('line--highlighted')
-          },
-          onVisitHighlightedWord(node) {
-            node.properties.className = ['word--highlighted']
-          },
         },
       ],
       [

@@ -93,7 +93,7 @@ export default function RootLayout({
         ></script>
       </head>
       <body
-        className="flex min-h-screen flex-col bg-slate-50 font-sans"
+        className="flex min-h-screen flex-col bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
         {children}

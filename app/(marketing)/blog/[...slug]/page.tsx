@@ -7,28 +7,31 @@ import '@/styles/mdx.css'
 
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronLeftIcon } from 'lucide-react'
 
+import { isAdSlotVisible } from '@/config/ads'
+import { readingMinutes, tableOfContents } from '@/lib/content'
 import { notFoundMetadata } from '@/lib/not-found'
 import { postStructuredData } from '@/lib/schema'
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
-import ArticleGrid from '@/components/ArticleGrid'
-import { buttonVariants } from '@/components/Button'
+import { AdSlot } from '@/components/AdSlot'
 import { ImageKit } from '@/components/ImageKit'
 import { JsonLd } from '@/components/JsonLd'
-import { SocialShare } from '@/components/SocialShare'
+import { PostCard } from '@/components/PostCard'
+import { ShareDialog } from '@/components/ShareDialog'
+import { TableOfContents } from '@/components/TableOfContents'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
-async function getPostFromParams({
-  params,
-}: PostPageProps): Promise<Post | null> {
-  const slug = params?.slug?.join('/')
-  const post = allPosts.find((post) => post.slugAsParams === slug)
+async function getPostFromParams(slug: string[] | undefined): Promise<Post | null> {
+  const path = slug?.join('/')
+  const post = allPosts.find((entry) => entry.slugAsParams === path)
 
   if (!post || !post.published) {
     return null
@@ -40,7 +43,8 @@ async function getPostFromParams({
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
-  const post = await getPostFromParams({ params })
+  const { slug } = await params
+  const post = await getPostFromParams(slug)
 
   if (!post) {
     return notFoundMetadata
@@ -85,13 +89,9 @@ export async function generateMetadata({
   }
 }
 
-// Slugs that were not generated must hit the not-found page. Next 14.0.4
-// streams an empty error document when notFound() runs on demand.
 export const dynamicParams = false
 
-export async function generateStaticParams(): Promise<
-  PostPageProps['params'][]
-> {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   return allPosts
     .filter((post) => post.published)
     .map((post) => ({
@@ -100,120 +100,154 @@ export async function generateStaticParams(): Promise<
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const post = await getPostFromParams({ params })
+  const { slug } = await params
+  const post = await getPostFromParams(slug)
 
   if (!post) {
     notFound()
   }
 
-  const posts = allPosts
+  const related = allPosts
     .filter((entry) => entry.published)
-    .filter((entry) => entry.slugAsParams !== params.slug[0])
+    .filter((entry) => entry.slugAsParams !== slug[0])
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
     .slice(0, 3)
 
   const { article, breadcrumb } = postStructuredData(post)
-
   const authors = post.authors.map((author) =>
-    allAuthors.find(({ slug }) => slug === `/authors/${author}`)
+    allAuthors.find((entry) => entry.slug === `/authors/${author}`)
   )
+  const minutes = readingMinutes(post)
+  const toc = tableOfContents(post.body.raw)
+  const sidebar = isAdSlotVisible('post-sidebar')
 
   return (
     <>
       <JsonLd data={article} />
       <JsonLd data={breadcrumb} />
-      <article className="container relative max-w-3xl py-6 lg:py-10">
-        <Link
-          href="/blog"
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'absolute left-[-200px] top-14 hidden xl:inline-flex'
-          )}
-        >
-          <ChevronLeftIcon className="mr-2 h-4 w-4" />
-          See all posts
-        </Link>
-        <div>
-          {post.date && (
-            <time dateTime={post.date} className="block text-sm text-slate-500">
-              Published on {formatDate(post.date)}
-            </time>
-          )}
-          <h1 className="mt-2 inline-block font-heading text-3xl leading-tight sm:text-4xl lg:text-5xl lg:leading-tight">
-            {post.title}
-          </h1>
-          {authors?.length ? (
-            <div className="mt-4 flex space-x-4">
-              {authors.map((author) =>
-                author ? (
-                  <Link
-                    key={author._id}
-                    href={`https://twitter.com/${author.twitter}`}
-                    className="flex items-center space-x-2 text-sm"
-                  >
-                    <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                      <ImageKit
-                        src={author.avatar}
-                        directory="CottageForTots/Author"
-                        alt={author.title}
-                        className="bg-white object-cover"
-                      />
-                    </div>
-
-                    <div className="flex-1 text-left leading-tight">
-                      <p className="font-medium">{author.title}</p>
-                      <p className="text-[12px] text-slate-500">
-                        @{author.twitter}
-                      </p>
-                    </div>
-                  </Link>
-                ) : null
-              )}
+      <div
+        className={cn(
+          'mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 lg:grid-cols-[16rem_minmax(0,1fr)]',
+          sidebar && 'xl:grid-cols-[16rem_minmax(0,1fr)_16rem]'
+        )}
+      >
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <TableOfContents items={toc} />
+        </aside>
+        <article className="min-w-0">
+          <Button variant="ghost" asChild className="mb-6">
+            <Link href="/blog">All posts</Link>
+          </Button>
+          {post.image ? (
+            <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-lg">
+              <ImageKit
+                directory="CottageForTots/Blog"
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                className="object-cover"
+                sizes="(min-width: 1024px) 720px, 100vw"
+              />
             </div>
           ) : null}
-        </div>
-        {post.image && (
-          <div className="aspect-h-3 aspect-w-4 relative my-8 overflow-hidden rounded-md border">
-            <ImageKit
-              directory="CottageForTots/Blog"
-              src={post.image}
-              alt={post.title}
-              width={700}
-              height={700}
-              className="object-cover"
-              priority
-            />
+          <header className="space-y-4">
+            <div className="flex flex-wrap gap-2">
+              <Badge>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
+              </Badge>
+              {post.updated ? (
+                <Badge variant="outline">
+                  <time dateTime={post.updated}>
+                    Updated {formatDate(post.updated)}
+                  </time>
+                </Badge>
+              ) : null}
+              <Badge variant="outline">{minutes} min read</Badge>
+            </div>
+            <h1 className="text-3xl leading-tight sm:text-4xl lg:text-5xl">
+              {post.title}
+            </h1>
+            {authors.length ? (
+              <div className="flex flex-wrap gap-4">
+                {authors.map((author) =>
+                  author ? (
+                    <a
+                      key={author._id}
+                      href={`https://twitter.com/${author.twitter}`}
+                      className="flex items-center gap-2 text-sm"
+                    >
+                      <span className="relative block size-10 overflow-hidden rounded-full">
+                        <ImageKit
+                          src={author.avatar}
+                          directory="CottageForTots/Author"
+                          alt={author.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </span>
+                      <span>
+                        <span className="block font-medium">{author.title}</span>
+                        <span className="text-muted-foreground">
+                          @{author.twitter}
+                        </span>
+                      </span>
+                    </a>
+                  ) : null
+                )}
+              </div>
+            ) : null}
+          </header>
+          {post.description ? (
+            <Card className="mt-6 hover:translate-y-0 hover:shadow-sm">
+              <CardContent className="p-6">
+                <p className="text-sm font-medium">Summary</p>
+                <p className="mt-2 text-muted-foreground">{post.description}</p>
+              </CardContent>
+            </Card>
+          ) : null}
+          <AdSlot placement="post-after-intro" />
+          <div className="mt-8">
+            <Mdx code={post.body.code} />
           </div>
-        )}
-        <Mdx code={post.body.code} />
-
-        <SocialShare title={post.title} url={post.slug} image={post.image} />
-
-        <hr className="mt-12" />
-        <div className="flex justify-center py-6 lg:py-10">
-          <Link
-            href="/blog"
-            className={cn(buttonVariants({ variant: 'ghost' }))}
-          >
-            <ChevronLeftIcon className="mr-2 h-4 w-4" />
-            See all posts
-          </Link>
-        </div>
-      </article>
-
-      <div className="relative bg-slate-100 px-0 py-12">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="text-center">
-            <h2 className="font-heading text-3xl capitalize text-slate-900 sm:text-4xl">
-              Related Posts
-            </h2>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <ShareDialog title={post.title} url={post.slug} image={post.image} />
+            <Button variant="ghost" asChild>
+              <Link href="/blog">All posts</Link>
+            </Button>
           </div>
-
-          <div className="px-4 sm:px-8 lg:px-12">
-            <ArticleGrid posts={posts} />
+          <div className="md:hidden">
+            <AdSlot placement="post-mobile-anchor" />
           </div>
-        </div>
+        </article>
+        {sidebar ? (
+          <aside className="hidden xl:block">
+            <div className="sticky top-24">
+              <AdSlot placement="post-sidebar" />
+            </div>
+          </aside>
+        ) : null}
       </div>
+      <section className="border-t bg-muted/40 py-12">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <h2 className="text-3xl">Related posts</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {related.map((entry) => (
+              <PostCard
+                key={entry._id}
+                post={{
+                  slug: entry.slug,
+                  title: entry.title,
+                  description: entry.description,
+                  date: entry.date,
+                  image: entry.image,
+                  readingMinutes: readingMinutes(entry),
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   )
 }

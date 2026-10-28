@@ -32,12 +32,16 @@ function isType(type: unknown, names: string[]) {
   return names.includes(elementName(type))
 }
 
+function nodeProps(node: React.ReactElement): { children?: React.ReactNode } {
+  return node.props as { children?: React.ReactNode }
+}
+
 function textContent(node: React.ReactNode): string {
   if (node == null || typeof node === 'boolean') return ''
   if (typeof node === 'string' || typeof node === 'number') return String(node)
   if (Array.isArray(node))
     return node.map((child) => textContent(child)).join('')
-  if (React.isValidElement(node)) return textContent(node.props.children)
+  if (React.isValidElement(node)) return textContent(nodeProps(node).children)
   return ''
 }
 
@@ -55,13 +59,13 @@ function collectRows(children: React.ReactNode): CellInfo[][] {
     for (const node of elementChildren(nodes)) {
       if (isType(node.type, ['tr', 'TableRow'])) {
         rows.push(
-          elementChildren(node.props.children).map((cell) => ({
+          elementChildren(nodeProps(node).children).map((cell) => ({
             header: isType(cell.type, ['th', 'TableHead']),
-            content: cell.props.children,
+            content: nodeProps(cell).children,
           }))
         )
       } else {
-        visit(node.props.children)
+        visit(nodeProps(node).children)
       }
     }
   }
@@ -110,17 +114,17 @@ export function MdxTable({
           {bodyRows.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className="overflow-hidden rounded-lg border border-slate-200 bg-white"
+              className="overflow-hidden rounded-lg border bg-card"
             >
               {row.map((cell, cellIndex) => (
                 <div
                   key={cellIndex}
-                  className="grid grid-cols-[minmax(0,40%)_minmax(0,1fr)] gap-3 border-b border-slate-200 px-4 py-3 last:border-b-0"
+                  className="grid grid-cols-[minmax(0,40%)_minmax(0,1fr)] gap-3 border-b px-4 py-3 last:border-b-0"
                 >
-                  <div className="min-w-0 break-words font-semibold text-slate-900">
+                  <div className="min-w-0 break-words font-semibold text-foreground">
                     {headers[cellIndex] || ''}
                   </div>
-                  <div className="min-w-0 break-words text-slate-700 [&_p]:m-0">
+                  <div className="min-w-0 break-words text-muted-foreground [&_p]:m-0">
                     {renderCellContent(cell.content)}
                   </div>
                 </div>

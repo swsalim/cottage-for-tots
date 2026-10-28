@@ -1,12 +1,15 @@
 // @ts-nocheck
+'use client'
+
 import * as React from 'react'
 import Link from 'next/link'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import { useMDXComponent } from 'next-contentlayer2/hooks'
 
 import { cn } from '@/lib/utils'
 
 import '@/styles/mdx.css'
 
+import { AdSlot } from '@/components/AdSlot'
 import { Callout } from '@/components/Callout'
 import { ImageKit } from '@/components/ImageKit'
 import {
@@ -109,6 +112,7 @@ const components = {
   Callout,
   Card: MdxCard,
   Link,
+  'ad-slot': () => <AdSlot placement="post-inline" />,
 }
 
 interface MdxProps {
@@ -119,7 +123,9 @@ export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code)
 
   return (
-    <div className="mdx prose-zinc prose">
+    <div className="mdx prose prose-neutral max-w-none">
+      {/* Compiled MDX is a component factory. It is memoized on `code`. */}
+      {/* eslint-disable-next-line react-hooks/static-components */}
       <Component components={components} />
     </div>
   )
