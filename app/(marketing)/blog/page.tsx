@@ -3,9 +3,11 @@ import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import { isAdSlotVisible } from '@/config/ads'
 import { publishedPosts, readingMinutes } from '@/lib/content'
+import { blogIndexStructuredData } from '@/lib/schema'
 import { cn } from '@/lib/utils'
 import { AdSlot } from '@/components/AdSlot'
 import { BlogBrowser } from '@/components/BlogBrowser'
+import { JsonLd } from '@/components/JsonLd'
 
 const config = {
   title: 'Blog Posts',
@@ -47,7 +49,8 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  const posts = publishedPosts().map((post) => ({
+  const published = publishedPosts()
+  const posts = published.map((post) => ({
     slug: post.slug,
     title: post.title,
     description: post.description,
@@ -55,10 +58,18 @@ export default function BlogPage() {
     image: post.image,
     readingMinutes: readingMinutes(post),
   }))
+  const { blog, breadcrumb } = blogIndexStructuredData({
+    name: config.title,
+    description: config.description,
+    posts: published,
+  })
   const sidebar = isAdSlotVisible('blog-sidebar')
 
   return (
-    <div
+    <>
+      <JsonLd data={blog} />
+      <JsonLd data={breadcrumb} />
+      <div
       className={cn(
         'mx-auto grid w-full max-w-6xl gap-8 px-4 py-10',
         sidebar && 'lg:grid-cols-[minmax(0,1fr)_16rem]'
@@ -84,6 +95,7 @@ export default function BlogPage() {
           </div>
         </aside>
       ) : null}
-    </div>
+      </div>
+    </>
   )
 }
