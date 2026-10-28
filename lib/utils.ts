@@ -1,6 +1,8 @@
 import { ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+import { absoluteUrl as toAbsoluteUrl } from '@/lib/site'
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -15,7 +17,7 @@ export function formatDate(input: string | number): string {
 }
 
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
+  return toAbsoluteUrl(path)
 }
 
 // NOTE: Only works when we set unoptimized: false in next.config.js

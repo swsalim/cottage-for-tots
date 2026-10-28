@@ -1,34 +1,32 @@
-'use client'
-
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 
+import { homeStructuredData } from '@/lib/schema'
 import { cn, formatDate } from '@/lib/utils'
 import { buttonVariants } from '@/components/Button'
 import Container from '@/components/Container'
 import { ImageKit } from '@/components/ImageKit'
+import { JsonLd } from '@/components/JsonLd'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 export default function Home() {
-  let posts
-
-  if (process.env.NODE_ENV === 'development') {
-    posts = allPosts
-      .sort((a, b) => {
-        return compareDesc(new Date(a.date), new Date(b.date))
-      })
-      .slice(0, 10)
-  } else {
-    posts = allPosts
-      .filter((post) => post.published)
-      .sort((a, b) => {
-        return compareDesc(new Date(a.date), new Date(b.date))
-      })
-      .slice(0, 10)
-  }
+  const posts = allPosts
+    .filter((post) => post.published)
+    .sort((a, b) => {
+      return compareDesc(new Date(a.date), new Date(b.date))
+    })
+    .slice(0, 10)
 
   return (
     <>
+      <JsonLd data={homeStructuredData()} />
       <div className="hero relative bg-inherit" data-testid="hero">
         <div className="hero-banner w-full-h-full absolute inset-0 -z-10"></div>
         <Container className="pb-12 pt-20 md:py-40">

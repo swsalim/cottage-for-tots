@@ -22,9 +22,6 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   metadataBase: siteConfig.url,
-  alternates: {
-    canonical: '/',
-  },
   authors: [
     {
       name: 'Yuyu',
