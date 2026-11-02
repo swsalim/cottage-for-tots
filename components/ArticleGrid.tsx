@@ -20,14 +20,18 @@ export default function ArticleGrid({ posts }: ArticleGridProps) {
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl sm:aspect-[2/1] sm:max-w-xs lg:aspect-[3/2]">
             <Link href={post.slug}>
               <span className="absolute inset-0 z-10" />
-              <ImageKit
-                src={post.image}
-                alt={post.title}
-                directory="CottageForTots/Blog"
-                width={2000}
-                height={1500}
-                className="h-full w-full bg-zinc-100 object-cover"
-              />
+              {post.image ? (
+                <ImageKit
+                  src={post.image}
+                  alt={post.title}
+                  directory="CottageForTots/Blog"
+                  width={2000}
+                  height={1500}
+                  className="h-full w-full bg-zinc-100 object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-zinc-100" />
+              )}
             </Link>
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-zinc-900/10" />
           </div>
