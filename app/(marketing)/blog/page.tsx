@@ -10,7 +10,7 @@ import { BlogBrowser } from '@/components/BlogBrowser'
 import { JsonLd } from '@/components/JsonLd'
 
 const config = {
-  title: 'Blog Posts',
+  title: 'Early Childhood Toy and Play Guides for Parents',
   description:
     'Delve into the world of early learning where creativity meets curiosity.',
   url: '/blog',

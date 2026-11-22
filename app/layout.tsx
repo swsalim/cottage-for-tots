@@ -18,7 +18,6 @@ const fontHeading = localFont({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: `%s · ${siteConfig.siteName}`,
   },
   description: siteConfig.description,
   metadataBase: siteConfig.url,

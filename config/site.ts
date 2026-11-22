@@ -1,7 +1,7 @@
 import { SiteConfig } from 'types'
 
 export const siteConfig: SiteConfig = {
-  title: 'Nurturing Young Minds with Playful Learning',
+  title: 'CottageForTots: Educational Toys and Play Guides',
   description:
     "Discover a world where education meets imagination. Our toys and books are specially curated to stimulate your child's development through every playful moment.",
   siteName: 'CottageForTots',
