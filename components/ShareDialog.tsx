@@ -21,7 +21,9 @@ export function ShareDialog({
 }) {
   const shareUrl = absoluteUrl(url)
   const media = image
-    ? `https://ik.imagekit.io/yuurrific/CottageForTots/Blog/${image}`
+    ? image.startsWith('/')
+      ? absoluteUrl(image)
+      : `https://ik.imagekit.io/yuurrific/CottageForTots/Blog/${image}`
     : ''
   const links = [
     {

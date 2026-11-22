@@ -7,6 +7,7 @@ const IMAGEKIT_DIRECTORY = 'CottageForTots/Blog'
 
 export function postImageUrl(filename: string) {
   if (/^https?:\/\//.test(filename)) return filename
+  if (filename.startsWith('/')) return absoluteUrl(filename)
   const imagekitId = process.env.NEXT_PUBLIC_IMAGEKIT_ID || 'yuurrific'
   return `https://ik.imagekit.io/${imagekitId}/${IMAGEKIT_DIRECTORY}/${filename}`
 }

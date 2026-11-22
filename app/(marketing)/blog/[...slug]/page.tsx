@@ -145,7 +145,7 @@ export default async function PostPage({ params }: PostPageProps) {
               <ImageKit
                 directory="CottageForTots/Blog"
                 src={post.image}
-                alt={post.title}
+                alt={post.imageAlt || post.title}
                 fill
                 priority
                 className="object-cover"

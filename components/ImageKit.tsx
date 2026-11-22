@@ -19,6 +19,19 @@ export function ImageKit({
   fill,
   ...props
 }: ImageKitProps) {
+  if (src.startsWith('/')) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        {...(fill
+          ? { fill: true }
+          : { width: width ?? 800, height: height ?? 600 })}
+        {...props}
+      />
+    )
+  }
+
   const imageSrc = directory ? `${directory}/${src}` : src
   return (
     <Image
